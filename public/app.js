@@ -1,0 +1,1 @@
+alert("Olá! Seja bem vindo à nosso site.");
