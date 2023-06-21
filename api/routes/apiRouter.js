@@ -4,7 +4,7 @@ const knex = require('knex')({
   client: 'pg',
   debug: true,
   connection: {
-    connectionSting : process.env.DATABASE_URL,
+    connectionSting : process.env.PGPASSWORD,
     ssl: { rejectUnauthorized: false },
   }
 });
