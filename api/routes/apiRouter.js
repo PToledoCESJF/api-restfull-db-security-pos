@@ -14,16 +14,6 @@ const knex = require('knex')({
 
 const endpoint = '/';
 
-// const lista_carros = {
-//   carros: [
-//       { id: 1, modelo: "Mobi Like", marca: "FIAT", ano: 2022  },
-//       { id: 2, modelo: "Kwid 1.0", marca: "Renault", ano: 2021  },
-//       { id: 3, modelo: "Ônix", marca: "Chevrolet", ano: 2020  },
-//       { id: 4, modelo: "HB20", marca: "Hyundai", ano: 2021  },
-//       { id: 5, modelo: "Virtus", marca: "Volkswagen", ano: 2022  },
-//   ]
-// };
-
 // apiRouter.get(endpoint + 'carros', (req, res) => {
 //   knex.select('*').from('carro')
 //     .then( carros => res.status(200).json(carros))
@@ -34,7 +24,7 @@ const endpoint = '/';
 // })
 
 apiRouter.get(endpoint + 'carros/:id', (req, res) => {
-  knex.select('*').from('carro').where({ id: req.params.id })
+  knex.select('*').from('carro').where('id', req.params.id)
     .then( carros => res.status(200).json(carros))
     .catch(err => {
       res.status(500).json({ 
