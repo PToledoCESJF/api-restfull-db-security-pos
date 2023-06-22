@@ -24,14 +24,14 @@ const endpoint = '/';
 //   ]
 // };
 
-apiRouter.get(endpoint + 'carros', (req, res) => {
-  knex.select('*').from('carro')
-    .then( carros => res.status(200).json(carros))
-    .catch(err => {
-      res.status(500).json({ 
-        message: 'Erro ao recuperar carros - ' + err.message });
-      });
-})
+// apiRouter.get(endpoint + 'carros', (req, res) => {
+//   knex.select('*').from('carro')
+//     .then( carros => res.status(200).json(carros))
+//     .catch(err => {
+//       res.status(500).json({ 
+//         message: 'Erro ao recuperar carros - ' + err.message });
+//       });
+// })
 
 apiRouter.get(endpoint + 'carros/:id', (req, res) => {
   knex.select('*').from('carro').where({ id: req.params.id })
