@@ -24,11 +24,11 @@ const endpoint = '/';
 // })
 
 apiRouter.get(endpoint + 'carros/:id', (req, res) => {
-  knex.select('*').from('carro').where('id', req.params.id)
+  knex('carro').where('id', req.params.id)
     .then( carros => res.status(200).json(carros))
     .catch(err => {
       res.status(500).json({ 
-        message: 'Erro ao recuperar carros - ' + err.message });
+        message: 'Erro ao recuperar carro - ' + err.message });
       });
 })
 
