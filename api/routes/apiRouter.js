@@ -33,9 +33,15 @@ apiRouter.get(endpoint + 'carros', (req, res) => {
       });
 })
 
-// routerAPI.get('/produtos', (req, res) => {
-//   res.json(produtos);
-// });
+apiRouter.get(endpoint + 'carros/:id', (req, res) => {
+  knex.select('*').from('carro').where({ id: req.params.id })
+    .then( carros => res.status(200).json(carros))
+    .catch(err => {
+      res.status(500).json({ 
+        message: 'Erro ao recuperar carros - ' + err.message });
+      });
+})
+
 
 // routerAPI.get('/produtos/:id', (req, res) => {
 //   let produto = produtos.find(p => p.id == req.params.id)
