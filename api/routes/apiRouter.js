@@ -32,6 +32,14 @@ apiRouter.get(endpoint + 'carros/:id', (req, res) => {
       });
 })
 
+apiRouter.post(endpoint + 'carros', (req, res) => {
+  knex('carro').insert(req.body)
+    .then( carros => res.status(201).json(carros))
+    .catch(err => {
+      res.status(500).json({ 
+        message: 'Erro ao inserir um carro - ' + err.message });
+      });
+})
 
 // routerAPI.get('/produtos/:id', (req, res) => {
 //   let produto = produtos.find(p => p.id == req.params.id)
