@@ -43,7 +43,7 @@ apiRouter.get(endpoint + "carros/:id", (req, res) => {
 apiRouter.post(endpoint + "carros", (req, res) => {
   knex("carro")
     .insert(req.body, ["id"])
-    .then((carros) => res.status(201).json({ message: `Carro inserido com sucesso: ${carros[0].id}` }))
+    .then((carros) => res.status(201).json({ message: `Carro inserido com sucesso: id: ${carros[0].id}` }))
     .catch((err) => {
       res.status(500).json({
         message: "Erro ao inserir um carro - " + err.message,
@@ -52,9 +52,11 @@ apiRouter.post(endpoint + "carros", (req, res) => {
 });
 
 apiRouter.put(endpoint + "carros/:id", (req, res) => {
+  let id = req.params.id;
   knex("carro")
-    .insert(req.body, ["id"])
-    .then((carros) => res.status(201).json({ message: `Carro atualizado com sucesso: ${carros[0].id}` }))
+    .where({ id })
+    .update(req.body, ["id"])
+    .then((carros) => res.status(201).json({ message: `Carro atualizado com sucesso: id: ${carros[0].id}` }))
     .catch((err) => {
       res.status(500).json({
         message: "Erro ao atualizar os dados de um carro - " + err.message,
