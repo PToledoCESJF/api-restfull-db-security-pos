@@ -23,8 +23,8 @@ const knex = require('knex')({
 
 apiRouter.get('/carros/:id', (req, res) => {
   let id = req.params.id
-  knex.select('*').from('carros').where({ id })
-    .then( carros => res.status(200).json(carros))
+  knex.select('*').from('carro').where({ id })
+    .then( carros => res.json(carros))
     .catch(err => {
       res.status(500).json({ 
         message: 'Erro ao recuperar carro - ' + err.message });
