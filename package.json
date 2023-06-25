@@ -5,8 +5,8 @@
   "main": "server.js",
   "scripts": {
     "start": "nodemon server.js",
-    "create-tables": "knex migrate:latest --env clinic",
-    "drop-tables": "knex migrate:rollback --env clinic"
+    "create-tables": "knex migrate:latest --env develop",
+    "drop-tables": "knex migrate:rollback --env develop"
   },
   "keywords": [],
   "author": "Paulo Toledo",
