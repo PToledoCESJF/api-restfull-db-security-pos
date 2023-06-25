@@ -12,7 +12,9 @@ const knex = require('knex')({
 apiRouter.use(express.json());
 apiRouter.use(express.urlencoded({ extended: true }));
 
-apiRouter.get('/carros', (req, res) => {
+const endpoint = '/';
+
+apiRouter.get(endpoint + 'carros', (req, res) => {
   knex.select('*').from('carro')
     .then( carros => res.status(200).json(carros))
     .catch(err => {
@@ -21,7 +23,7 @@ apiRouter.get('/carros', (req, res) => {
       });
 })
 
-apiRouter.get('/carros/:id', (req, res) => {
+apiRouter.get(endpoint + 'carros/:id', (req, res) => {
   let id = req.params.id
   knex.select('*').from('carro').where({ id })
     .then( carros => res.status(200).json(carros))
