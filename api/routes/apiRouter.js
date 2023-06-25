@@ -12,9 +12,7 @@ const knex = require('knex')({
 // routerAPI.use(express.json());
 // routerAPI.use(express.urlencoded({ extended: true }));
 
-const endpoint = '/';
-
-// apiRouter.get(endpoint + 'carros', (req, res) => {
+// apiRouter.get('/carros', (req, res) => {
 //   knex.select('*').from('carro')
 //     .then( carros => res.status(200).json(carros))
 //     .catch(err => {
@@ -23,8 +21,9 @@ const endpoint = '/';
 //       });
 // })
 
-apiRouter.get(endpoint + 'carros/:id', (req, res) => {
-  knex('carro').where('id', req.params.id)
+apiRouter.get('/carros/:id', (req, res) => {
+  let id = req.params.id
+  knex.select('*').from('carros').where({ id })
     .then( carros => res.status(200).json(carros))
     .catch(err => {
       res.status(500).json({ 
@@ -33,7 +32,12 @@ apiRouter.get(endpoint + 'carros/:id', (req, res) => {
 })
 
 apiRouter.post(endpoint + 'carros', (req, res) => {
-  knex('carro').insert(req.body)
+  knex('carro').insert({
+    id: null,
+    modelo: req.body.modelo,
+    marca: req.body.marca,
+    ano: req.body.ano
+  })
     .then( carros => res.status(201).json(carros))
     .catch(err => {
       res.status(500).json({ 
