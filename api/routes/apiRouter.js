@@ -9,8 +9,8 @@ const knex = require('knex')({
   }
 });
 
-routerAPI.use(express.json());
-routerAPI.use(express.urlencoded({ extended: true }));
+apiRouter.use(express.json());
+apiRouter.use(express.urlencoded({ extended: true }));
 
 apiRouter.get('/carros', (req, res) => {
   knex.select('*').from('carro')
