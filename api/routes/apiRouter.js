@@ -35,7 +35,7 @@ apiRouter.get(endpoint + 'carros/:id', (req, res) => {
 
 apiRouter.post(endpoint + 'carros', (req, res) => {
   knex('carro').insert({
-    id: null,
+    id: req.body.id,
     modelo: req.body.modelo,
     marca: req.body.marca,
     ano: req.body.ano
