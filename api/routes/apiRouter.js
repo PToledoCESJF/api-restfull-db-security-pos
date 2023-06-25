@@ -15,9 +15,8 @@ const knexProd = knex(knexfile.production);
 const endpoint = "/";
 
 apiRouter.get(endpoint + "carros", (req, res) => {
-  knexProd
+  knexProd("carro")
     .select("*")
-    .from("carro")
     .then((carros) => res.status(200).json(carros))
     .catch((err) => {
       res.status(500).json({
@@ -28,9 +27,8 @@ apiRouter.get(endpoint + "carros", (req, res) => {
 
 apiRouter.get(endpoint + "carros/:id", (req, res) => {
   let id = req.params.id;
-  knexProd
+  knexProd("carro")
     .select("*")
-    .from("carro")
     .where({ id })
     .then((carros) => res.status(200).json(carros))
     .catch((err) => {
