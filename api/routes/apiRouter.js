@@ -62,7 +62,7 @@ apiRouter.put(endpoint + "carros/:id", (req, res) => {
     .update(req.body, ["id"])
     .then((carros) =>
       res
-        .status(201)
+        .status(200)
         .json({ message: `Carro atualizado com sucesso: id: ${carros[0].id}` })
     )
     .catch((err) => {
@@ -76,11 +76,11 @@ apiRouter.delete(endpoint + "carros/:id", (req, res) => {
   let id = req.params.id;
   knex("carro")
     .where({ id })
-    .delete(req.body, ["id"])
-    .then((carros) =>
+    .delete()
+    .then(() =>
       res
         .status(200)
-        .json({ message: `Carro excluido com sucesso: id: ${carros[0].id}` })
+        .json({ message: `Carro excluido com sucesso: id: ${id}` })
     )
     .catch((err) => {
       res.status(500).json({
