@@ -9,8 +9,8 @@ const knex = require("knex")({
   },
 });
 
-apiRouter.use(express.json());
-apiRouter.use(express.urlencoded({ extended: true }));
+// apiRouter.use(express.json());
+// apiRouter.use(express.urlencoded({ extended: true }));
 
 const endpoint = "/";
 
@@ -43,7 +43,11 @@ apiRouter.get(endpoint + "carros/:id", (req, res) => {
 apiRouter.post(endpoint + "carros", (req, res) => {
   knex("carro")
     .insert(req.body, ["id"])
-    .then((carros) => res.status(201).json({ message: `Carro inserido com sucesso: id: ${carros[0].id}` }))
+    .then((carros) =>
+      res
+        .status(201)
+        .json({ message: `Carro inserido com sucesso: id: ${carros[0].id}` })
+    )
     .catch((err) => {
       res.status(500).json({
         message: "Erro ao inserir um carro - " + err.message,
@@ -56,7 +60,11 @@ apiRouter.put(endpoint + "carros/:id", (req, res) => {
   knex("carro")
     .where({ id })
     .update(req.body, ["id"])
-    .then((carros) => res.status(201).json({ message: `Carro atualizado com sucesso: id: ${carros[0].id}` }))
+    .then((carros) =>
+      res
+        .status(201)
+        .json({ message: `Carro atualizado com sucesso: id: ${carros[0].id}` })
+    )
     .catch((err) => {
       res.status(500).json({
         message: "Erro ao atualizar os dados de um carro - " + err.message,
@@ -64,43 +72,21 @@ apiRouter.put(endpoint + "carros/:id", (req, res) => {
     });
 });
 
-// routerAPI.get('/produtos/:id', (req, res) => {
-//   let produto = produtos.find(p => p.id == req.params.id)
-//   res.json(produto);
-// });
-
-// routerAPI.post('/produtos', (req, res) => {
-//   console.log(req.body);
-//   req.body.id = produtos.length + 1;
-//   produtos.push(req.body);
-
-//   res.status(201).json({
-//     message: 'Produto adicionado com sucesso',
-//     data: { id: req.body.id}
-//   });
-// });
-
-// routerAPI.put('/produtos/:id', (req, res) => {
-//   let produto = produtos.find(p => p.id == req.params.id);
-//   produto.descricao = req.body.descricao;
-//   produto.marca = req.body.marca;
-//   produto.preco = req.body.preco;
-
-//   res.status(200).json({
-//     message: 'Produto atualizado com sucesso',
-//     data: { produto: produto}
-//   });
-// });
-
-// routerAPI.delete('/produtos/:id', (req, res) => {
-//   let produto = produtos.find(p => p.id == req.params.id);
-//   let index = produtos.indexOf(produto);
-//   let removed = produtos.splice(index, 1);
-
-//   res.status(200).json({
-//     message: 'Produto deletado com sucesso',
-//     data: { removido: removed }
-//   });
-// });
+apiRouter.delete(endpoint + "carros/:id", (req, res) => {
+  let id = req.params.id;
+  knex("carro")
+    .where({ id })
+    .delete(req.body, ["id"])
+    .then((carros) =>
+      res
+        .status(200)
+        .json({ message: `Carro excluido com sucesso: id: ${carros[0].id}` })
+    )
+    .catch((err) => {
+      res.status(500).json({
+        message: "Erro ao excluir um carro - " + err.message,
+      });
+    });
+});
 
 module.exports = apiRouter;
