@@ -1,8 +1,6 @@
 const express = require("express");
 let apiRouter = express.Router();
-const knex = require("knex")
-const knexfile = require('./knexfile');
-const knexProd = knex(knexfile.production);
+
 // ({
 //   client: "pg",
 //   debug: true,
@@ -15,7 +13,7 @@ const knexProd = knex(knexfile.production);
 const endpoint = "/";
 
 apiRouter.get(endpoint + "carros", (req, res) => {
-  knexProd
+  app.db_prod
     .select("*")
     .from("carro")
     .then((carros) => res.status(200).json(carros))
@@ -28,7 +26,7 @@ apiRouter.get(endpoint + "carros", (req, res) => {
 
 apiRouter.get(endpoint + "carros/:id", (req, res) => {
   let id = req.params.id;
-  knexProd
+  app.db_prod
     .select("*")
     .from("carro")
     .where({ id })
@@ -41,7 +39,7 @@ apiRouter.get(endpoint + "carros/:id", (req, res) => {
 });
 
 apiRouter.post(endpoint + "carros", (req, res) => {
-  knexProd("carro")
+  app.db_prod("carro")
     .insert(req.body, ["id"])
     .then((carros) =>
       res
@@ -57,7 +55,7 @@ apiRouter.post(endpoint + "carros", (req, res) => {
 
 apiRouter.put(endpoint + "carros/:id", (req, res) => {
   let id = req.params.id;
-  knexProd("carro")
+  app.db_prod("carro")
     .where({ id })
     .update(req.body, ["id"])
     .then((carros) =>
@@ -74,7 +72,7 @@ apiRouter.put(endpoint + "carros/:id", (req, res) => {
 
 apiRouter.delete(endpoint + "carros/:id", (req, res) => {
   let id = req.params.id;
-  knexProd("carro")
+  app.db_prod("carro")
     .where({ id })
     .delete()
     .then(() =>

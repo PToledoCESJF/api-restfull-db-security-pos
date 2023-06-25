@@ -3,7 +3,12 @@ require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
 const path = require("path");
+const knex = require("knex")
+const knexfile = require('./knexfile');
+
 const app = express();
+app.db_prod = knex(knexfile.production);
+
 const apiRouter = require("./api/routes/apiRouter");
 let port = process.env.PORT || 3001;
 
