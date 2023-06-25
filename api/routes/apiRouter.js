@@ -9,22 +9,22 @@ const knex = require('knex')({
   }
 });
 
-// routerAPI.use(express.json());
-// routerAPI.use(express.urlencoded({ extended: true }));
+routerAPI.use(express.json());
+routerAPI.use(express.urlencoded({ extended: true }));
 
-// apiRouter.get('/carros', (req, res) => {
-//   knex.select('*').from('carro')
-//     .then( carros => res.status(200).json(carros))
-//     .catch(err => {
-//       res.status(500).json({ 
-//         message: 'Erro ao recuperar carros - ' + err.message });
-//       });
-// })
+apiRouter.get('/carros', (req, res) => {
+  knex.select('*').from('carro')
+    .then( carros => res.status(200).json(carros))
+    .catch(err => {
+      res.status(500).json({ 
+        message: 'Erro ao recuperar carros - ' + err.message });
+      });
+})
 
 apiRouter.get('/carros/:id', (req, res) => {
   let id = req.params.id
   knex.select('*').from('carro').where({ id })
-    .then( carros => res.json(carros))
+    .then( carros => res.status(200).json(carros))
     .catch(err => {
       res.status(500).json({ 
         message: 'Erro ao recuperar carro - ' + err.message });
