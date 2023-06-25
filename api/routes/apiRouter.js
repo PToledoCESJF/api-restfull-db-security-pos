@@ -2,15 +2,6 @@ const express = require("express");
 let apiRouter = express.Router();
 const knexfile = require('../../knexfile');
 const knex = require("knex")(knexfile.production)
-// const knex = knex(knexfile.production);
-// ({
-//   client: "pg",
-//   debug: true,
-//   connection: {
-//     connectionString: process.env.DATABASE_URL,
-//     ssl: { rejectUnauthorized: false },
-//   },
-// });
 
 const endpoint = "/";
 

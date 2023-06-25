@@ -2,6 +2,14 @@
 
 require("dotenv").config();
 module.exports = {
+  production: {
+    client: "pg",
+    debug: true,
+    connection: {
+      connectionString: process.env.DATABASE_URL,
+      ssl: { rejectUnauthorized: false },
+    },
+  },
   develop: {
     client: process.env.KNEX_PUBLIC_DATABASE_CLIENT,
     connection: {
@@ -10,14 +18,6 @@ module.exports = {
       database: process.env.KNEX_PUBLIC_DATABASE_NAME,
       user: process.env.KNEX_PUBLIC_DATABASE_USER,
       password: process.env.KNEX_PUBLIC_DATABASE_PASSWD,
-    },
-    production: {
-      client: "pg",
-      debug: true,
-      connection: {
-        connectionString: process.env.DATABASE_URL,
-        ssl: { rejectUnauthorized: false },
-      },
     },
     pool: {
       min: 2,
